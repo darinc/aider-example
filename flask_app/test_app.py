@@ -54,5 +54,20 @@ class FlaskAppTestCase(unittest.TestCase):
         self.assertTrue(sequence[-2] <= max_val)
         self.assertTrue(sequence[-1] + sequence[-2] > max_val)
 
+    def test_factorial_endpoint(self):
+        n = 5
+        response = self.client.get(f'/factorial/{n}')
+        self.assertEqual(response.status_code, 200)
+        expected_result = 1
+        for i in range(2, n + 1):
+            expected_result *= i
+        self.assertEqual(response.json['result'], expected_result)
+
+    def test_factorial_endpoint_error(self):
+        n = -5
+        response = self.client.get(f'/factorial/{n}')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json['error'], 'Invalid input: n must be non-negative')
+
 if __name__ == '__main__':
     unittest.main()

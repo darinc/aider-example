@@ -46,6 +46,15 @@ def create_app():
         logging.debug(f"Fibonacci endpoint took {end_time - start_time} seconds")
         return {'sequence': sequence}
 
+    @app.route('/factorial/<int:n>')
+    def factorial(n):
+        if n < 0:
+            return {'error': 'Invalid input: n must be non-negative'}, 400
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return {'result': result}
+
     return app
 
 if __name__ == '__main__':
