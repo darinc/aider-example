@@ -44,5 +44,15 @@ class FlaskAppTestCase(unittest.TestCase):
         expected_sequence = [0, 1, 1, 2, 3, 5, 8]
         self.assertEqual(response.json['sequence'], expected_sequence)
 
+    def test_large_fibonacci_endpoint(self):
+        max_val = 10000
+        response = self.client.get(f'/fibonacci/{max_val}')
+        self.assertEqual(response.status_code, 200)
+        sequence = response.json['sequence']
+        # We check if the last two numbers are below the max_val and their sum is above max_val
+        self.assertTrue(sequence[-1] <= max_val)
+        self.assertTrue(sequence[-2] <= max_val)
+        self.assertTrue(sequence[-1] + sequence[-2] > max_val)
+
 if __name__ == '__main__':
     unittest.main()
