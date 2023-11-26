@@ -23,6 +23,13 @@ def create_app():
                 results.append(str(i))
         return {'results': results}
 
+    @app.route('/fibonacci/<int:max_val>')
+    def fibonacci(max_val):
+        sequence = [0, 1]
+        while sequence[-1] + sequence[-2] <= max_val:
+            sequence.append(sequence[-1] + sequence[-2])
+        return {'sequence': sequence}
+
     return app
 
 if __name__ == '__main__':
