@@ -45,7 +45,7 @@ class FlaskAppTestCase(unittest.TestCase):
         self.assertEqual(response.json['sequence'], expected_sequence)
 
     def test_large_fibonacci_endpoint(self):
-        max_val = 10000
+        max_val = 100000000000000000000000
         response = self.client.get(f'/fibonacci/{max_val}')
         self.assertEqual(response.status_code, 200)
         sequence = response.json['sequence']
