@@ -37,5 +37,13 @@ class FlaskAppTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json['error'], 'Invalid range: min must be less than or equal to max')
 
+    def test_fibonacci_endpoint(self):
+        max_val = 10
+        response = self.client.get(f'/fibonacci/{max_val}')
+        self.assertEqual(response.status_code, 200)
+        # TODO: Replace the following line with the actual expected Fibonacci sequence up to max_val
+        expected_sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+        self.assertEqual(response.json['sequence'], expected_sequence)
+
 if __name__ == '__main__':
     unittest.main()
