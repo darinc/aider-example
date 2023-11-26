@@ -24,4 +24,3 @@ aider --model gpt-4-1106-preview
 ```
 
 ## Tasks
-- [ ] fake task list
