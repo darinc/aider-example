@@ -13,11 +13,13 @@ class FlaskAppTestCase(unittest.TestCase):
         self.assertEqual(response.data, b'pong')
 
     def test_fizzbuzz_endpoint(self):
-        response = self.client.get('/fizzbuzz')
+        min_val = 1
+        max_val = 15
+        response = self.client.get(f'/fizzbuzz/{min_val}/{max_val}')
         self.assertEqual(response.status_code, 200)
         fizzbuzz_results = response.json['results']
         expected_results = []
-        for i in range(1, 101):
+        for i in range(min_val, max_val + 1):
             if i % 3 == 0 and i % 5 == 0:
                 expected_results.append('FizzBuzz')
             elif i % 3 == 0:
