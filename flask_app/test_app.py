@@ -30,5 +30,12 @@ class FlaskAppTestCase(unittest.TestCase):
                 expected_results.append(str(i))
         self.assertEqual(fizzbuzz_results, expected_results)
 
+    def test_fizzbuzz_endpoint_error(self):
+        min_val = 15
+        max_val = 10
+        response = self.client.get(f'/fizzbuzz/{min_val}/{max_val}')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json['error'], 'Invalid range: min must be less than or equal to max')
+
 if __name__ == '__main__':
     unittest.main()
