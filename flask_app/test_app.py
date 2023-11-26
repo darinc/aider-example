@@ -66,8 +66,8 @@ class FlaskAppTestCase(unittest.TestCase):
     def test_factorial_endpoint_error(self):
         n = -5
         response = self.client.get(f'/factorial/{n}')
-        self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json['error'], 'Invalid input: n must be non-negative')
+        self.assertEqual(response.status_code, 400, f"Expected status code 400, got {response.status_code}")
+        self.assertEqual(response.json.get('error'), 'Invalid input: n must be non-negative', f"Expected error message 'Invalid input: n must be non-negative', got {response.json.get('error')}")
 
 if __name__ == '__main__':
     unittest.main()
