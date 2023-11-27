@@ -1,5 +1,6 @@
 import time
 import logging
+import math
 from flask import Flask
 
 logging.basicConfig(level=logging.DEBUG)
@@ -46,7 +47,11 @@ def create_app():
         logging.debug(f"Fibonacci endpoint took {end_time - start_time} seconds")
         return {'sequence': sequence}
 
-    # No changes needed if the above code is correct
+    @app.route('/factorial/<int:n>')
+    def factorial(n):
+        if n < 0:
+            return {'error': 'Invalid input: n must be non-negative'}, 400
+        return {'result': math.factorial(n)}
 
     return app
 
